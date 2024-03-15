@@ -1,3 +1,5 @@
+//------------PRUEBA NUMERO 1 -----------------------------//
+
 /*let opcion
 
 do {
@@ -167,3 +169,135 @@ if (carritoStorage) {
     document.body.append(div)
 }
 */
+
+// -------------- PRUEBA NUMERO 2 --------------------------------//
+
+/*// Datos de productos
+const productos = [
+    { id: 1, nombre: 'Camiseta', precio: 25.99, stock: 20 },
+    { id: 2, nombre: 'Jeans', precio: 49.99, stock: 20 },
+    { id: 3, nombre: 'Zapatillas', precio: 79.99, stock: 20 }
+];
+
+localStorage.setItem('productos', JSON.stringify(productos));
+
+function mostrarProductos() {
+    const contenedorProductos = document.getElementById('productos');
+    contenedorProductos.innerHTML = '';
+
+    productos.forEach(producto => {
+        const divProducto = document.createElement('div');
+        divProducto.classList.add('producto');
+        divProducto.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <p>Precio: $${producto.precio}</p>
+            <p>Stock: ${producto.stock}</p>
+            <button onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+            <button onclick="quitarDelCarrito(${producto.id})">Quitar del Carrito</button>
+        `;
+        contenedorProductos.appendChild(divProducto);
+    });
+}
+
+
+// Llama a la función para mostrar los productos al cargar la página
+mostrarProductos();
+
+// Obtener los botones y el contenedor de productos
+const botonAgregar = document.getElementById('agregarProducto');
+const botonQuitar = document.getElementById('quitarProducto');
+const contenedorProductos = document.getElementById('productos');
+
+// Recuperar los datos del localStorage
+const productosGuardados = localStorage.getItem('productos');
+let productosObjeto = JSON.parse(localStorage.getItem('productos')) || [];
+
+function guardarCarritoEnLocalStorage() {
+    localStorage.setItem('productos', JSON.stringify(productosObjeto));
+}
+
+
+// Ahora puedes usar "productosObjeto" en tu código
+console.log(productosObjeto); // Verifica que los datos se hayan cargado correctamente
+
+// Inicializa el carrito como un array vacío
+const cart = []; 
+
+
+// Función para guardar el carrito en localStorage
+function guardarCarritoEnLocalStorage() {
+    localStorage.setItem('productos', JSON.stringify(productosGuardados));
+}
+
+
+// Función para agregar un producto al carrito
+function agregarAlCarrito(producto) {
+    const indiceEncontradoCarrito = cart.findIndex(elemento => elemento.id === producto.id);
+
+    if (indiceEncontradoCarrito === -1) {
+        // Producto no está en el carrito, agrega uno
+        producto.cantidad = 1;
+        cart.push(producto);
+    } else {
+        // Producto ya está en el carrito, aumenta la cantidad
+        cart[indiceEncontradoCarrito].cantidad += 1;
+    }
+
+    // Actualiza el stock en el objeto original
+    const indiceProducto = productos.findIndex(p => p.id === producto.id);
+    if (indiceProducto !== -1) {
+        productos[indiceProducto].stock -= 1;
+    }
+}
+
+    // Guarda los cambios en el localStorage
+    guardarCarritoEnLocalStorage();
+    mostrarProductos();
+
+// Evento al hacer clic en "Agregar al carrito"
+botonAgregar.addEventListener('click', () => {
+    const productoDelCarrito = { id: 4, nombre: 'Nuevo Producto', precio: 25.99 };
+    agregarAlCarrito(productoDelCarrito);
+});
+
+// Función para quitar un producto del carrito
+function quitarDelCarrito(idProducto) {
+    // Filtra los productos y crea un nuevo array sin el producto a quitar
+    const nuevosProductos = productosObjeto.filter(producto => producto.id !== idProducto);
+    // Actualiza la variable productosObjeto con el nuevo array
+    productosObjeto = nuevosProductos;
+    guardarCarritoEnLocalStorage(); // Actualiza el localStorage
+    mostrarProductos(); // Vuelve a mostrar los productos en la página
+}
+
+// Evento al hacer clic en "Quitar del carrito"
+botonQuitar.addEventListener('click', () => {
+    const idProductoDelCarrito = 3; // ID del producto a quitar (ajústalo según tus necesidades)
+    quitarDelCarrito(idProductoDelCarrito);
+});
+
+
+// Función para renderizar el carrito
+function renderizarCarrito() {
+};
+
+*/
+
+/* MODELO DE CARD 
+<!-- Esqueleto de producto --
+        <!-- <div class="card col" style="width: 18rem;" id="">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6>tipo</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <span>stock</span>
+                <span>$</span>
+                <form>
+                    <label for="">Cantidad</label>
+                    <input type="number" placeholder="1" id="">
+                    <button class="btn btn-primary" id="">Agregar</button>
+                </form>
+            </div>
+        </div> --
+        */
