@@ -301,3 +301,24 @@ function renderizarCarrito() {
             </div>
         </div> --
         */
+
+/* Constante de productos anterior */
+
+        // array de productos dinámico
+
+
+// Array de productos base
+/*const productosBase = [
+    {
+        name: "Jeans",
+        id: "001",
+        type: "Jeans",
+        price: 45000,
+        stock: 32,
+        description: "Jeans Levis talle 44"
+    },
+    { name: "Gorra", id: "002", type: "Accesorios", price: 21000, stock: 19, description: "Gorra NY de hilo y algodón talle universal" },
+    { name: "Zapatillas", id: "003", type: "Calzado", price: 37000, stock: 180, description: "Calzado urbano John Foos para uso diario talle 39" },
+    { name: "Remera", id: "004", type: "Remeras", price: 45302, stock: 180, description: "Remera Jordan mangas cortas talle 40" }
+]
+*/
