@@ -6,7 +6,7 @@
         "price": 25000,
         "stock": 19,
         "description": "Remera Jordan mangas cortas talle 40",
-        "rutaImagen": "Camiseta1.png"
+        "Imagen": "./assets/Camiseta1.png"
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "price": 45000,
         "stock": 19,
         "description": "Jeans Levis talle 44",
-        "rutaImagen": "Jeans2.png"
+        "Imagen": "./assets/Jeans2.png"
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "price": 59000,
         "stock": 19,
         "description": "Calzado urbano John Foos para uso diario talle 39",
-        "rutaImagen": "Zapatillas3.png"
+        "Imagen": "./assets/Zapatillas3.png"
     },
     { 
         "id": 4,
@@ -33,6 +33,6 @@
         "price": 21000,
         "stock": 19,
         "description": "Gorra NY de hilo y algodón talle universal",
-        "rutaImagen": "Gorra4.png"
+        "Imagen": "./assets/Gorra4.png"
     }
 ]

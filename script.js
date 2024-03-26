@@ -15,14 +15,13 @@ async function pedirDatosalBackend() {
 pedirDatosalBackend()
 
 class Producto {
-    constructor(name, id, type, price, stock, description, rutaImagen) {
+    constructor(name, id, type, price, stock, description,) {
         this.name = name;
         this.id = id;
         this.type = type;
         this.price = price;
         this.stock = stock;
         this.description = description;
-        this.rutaImagen = rutaImagen;
     }
 }
 
@@ -31,10 +30,10 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 const pedidos = JSON.parse(localStorage.getItem("pedidos")) || []
 
 const agregarProducto = ({ name, id, type, price, stock, description }) => {
-    
-    if (productos.some(prod => prod.id === id)) {        
+
+    if (productos.some(prod => prod.id === id)) {
     } else {
-        const productoNuevo = new Producto(name, id, type, price, stock, description)
+        const productoNuevo = new Producto(name, id, type, price, stock, description,)
         productos.push(productoNuevo)
         localStorage.setItem('productos', JSON.stringify(productos))
     }
@@ -42,7 +41,7 @@ const agregarProducto = ({ name, id, type, price, stock, description }) => {
 
 const productosPreexistentes = () => {
     if (productos.length === 0) {
-        productosBase.forEach(prod => {
+        productos.forEach(prod => {
             let dato = JSON.parse(JSON.stringify(prod))
             agregarProducto(dato)
         }
@@ -65,6 +64,13 @@ const totalCarritoRender = () => {
 const agregarCarrito = (objetoCarrito) => {
     carrito.push(objetoCarrito)
     totalCarritoRender()
+
+    Swal.fire({
+        title: 'Agregaste productos al carrito',
+        text: 'Al pie de página verás tus productos',
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+      })
 }
 
 const renderizarCarrito = () => {
@@ -88,10 +94,12 @@ const renderizarCarrito = () => {
         let carritoString = JSON.stringify(carrito)
         localStorage.setItem("carrito", carritoString)
     })
+    const carritoTotal = document.getElementById("carritoTotal")
+    carritoTotal.innerHTML = `Precio total: $ ${totalCarrito()}`
 }
 
 const borrarCarrito = () => {
-    carrito.length = 0 
+    carrito.length = 0
     let carritoString = JSON.stringify(carrito)
     localStorage.setItem("carrito", carritoString)
     renderizarCarrito()
@@ -99,10 +107,10 @@ const borrarCarrito = () => {
 }
 borrarCarrito()
 
-const renderizarProductos = (arrayUtilizado) => {
+const renderizarProductos = (productosPreexistentes) => {
     const contenedorProductos = document.getElementById("contenedorProductos")
     contenedorProductos.innerHTML = ""
-    arrayUtilizado.forEach(({ name, id, type, price, stock, description }) => {
+    productosPreexistentes.forEach(({ name, id, type, price, stock, description,}) => {
         const prodCard = document.createElement("div")
         prodCard.classList.add("col-xs")
         prodCard.classList.add("card")
@@ -118,7 +126,7 @@ const renderizarProductos = (arrayUtilizado) => {
                     <span>$ ${price}</span>
                     <form id="form${id}">
                         <label for="contador${id}">Cantidad</label>
-                        <input type="number" placeholder="0" id="contador${id}">
+                        <input type="number" placeholder="1" id="contador${id}">
                         <button class="btn btn-primary" id="botonProd${id}">Agregar</button>
                     </form>
                 </div>`
@@ -146,6 +154,13 @@ const finalizarCompra = (event) => {
     borrarCarrito()
     let mensaje = document.getElementById("carritoTotal")
     mensaje.innerHTML = "Muchas gracias por su compra, los esperamos pronto"
+
+    Swal.fire({
+        title: '¡Genial!',
+        text: '¡Acabas de realizar tu compra!',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    })
 
 }
 
