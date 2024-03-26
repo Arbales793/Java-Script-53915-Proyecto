@@ -70,7 +70,7 @@ const agregarCarrito = (objetoCarrito) => {
         text: 'Al pie de página verás tus productos',
         icon: 'info',
         confirmButtonText: 'Aceptar'
-      })
+    })
 }
 
 const renderizarCarrito = () => {
@@ -86,6 +86,12 @@ const renderizarCarrito = () => {
                 if (elemento.id !== id) {
                     return elemento
                 }
+                Swal.fire({
+                    title: '¡Ups!',
+                    text: '¡Acabas de quitar cosas a tu carrito!',
+                    icon: 'warning',
+                    confirmButtonText: 'Listo'
+                })
             })
             let carritoString = JSON.stringify(carrito)
             localStorage.setItem("carrito", carritoString)
@@ -104,32 +110,34 @@ const borrarCarrito = () => {
     localStorage.setItem("carrito", carritoString)
     renderizarCarrito()
 
+
 }
 borrarCarrito()
+
 
 const renderizarProductos = (productosPreexistentes) => {
     const contenedorProductos = document.getElementById("contenedorProductos")
     contenedorProductos.innerHTML = ""
-    productosPreexistentes.forEach(({ name, id, type, price, stock, description,}) => {
+    productosPreexistentes.forEach(({ name, id, type, price, stock, description, }) => {
         const prodCard = document.createElement("div")
         prodCard.classList.add("col-xs")
         prodCard.classList.add("card")
         prodCard.style = "width: 270px;height: 550px; margin:3px"
         prodCard.id = id
         prodCard.innerHTML = `
-                <img src="./assets/${name + id}.png" class="card-img-top" alt="${name}">
-                <div class="card-body">
-                    <h5 class="card-title">${name}</h5>
-                    <h6>${type}</h6>
-                    <p class="card-text">${description}</p>
-                    <span>Stock: ${stock}</span>
-                    <span>$ ${price}</span>
-                    <form id="form${id}">
-                        <label for="contador${id}">Cantidad</label>
-                        <input type="number" placeholder="1" id="contador${id}">
-                        <button class="btn btn-primary" id="botonProd${id}">Agregar</button>
-                    </form>
-                </div>`
+                <img src="./assets/${name + id}.png" class="card-img-top" alt="${name}">    
+                    <div class="card-body">
+                        <h5 class="card-title">${name}</h5>
+                        <h6>${type}</h6>
+                        <p class="card-text">${description}</p>
+                        <span>Stock: ${stock}</span>
+                        <span>$ ${price}</span>
+                        <form id="form${id}">
+                            <label for="contador${id}">Cantidad</label>
+                            <input type="number" placeholder="1" id="contador${id}">
+                            <button class="btn btn-primary" id="botonProd${id}">Agregar</button>
+                        </form>
+                    </div>`
         contenedorProductos.appendChild(prodCard)
         const btn = document.getElementById(`botonProd${id}`)
         btn.addEventListener("click", (evento) => {
